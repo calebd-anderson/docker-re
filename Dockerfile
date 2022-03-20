@@ -1,11 +1,14 @@
-FROM alpine:latest
-LABEL maintainer="Caleb Anderson caleb.anderson@my.metrostate.edu"
-RUN apk add --update --no-cache openssh
-RUN apk add vim file binutils libc6-compat gcc gdb musl-dev python3
+FROM ubuntu:latest
+RUN dpkg --add-architecture i386
+RUN apt update
+RUN apt install --no-install-recommends --assume-yes wine gdb gdb-mingw-w64 gdb-mingw-w64-target gdbserver
+RUN apt install --no-install-recommends --assume-yes gcc openssh-server vim file libc6:i386 libncurses5:i386 libstdc++6:i386
 RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
 RUN echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
-RUN adduser -h /home/caleb -s /bin/sh -D caleb
-RUN echo -n 'root:***REMOVED***' | chpasswd
-ENTRYPOINT ["/entrypoint.sh"]
-EXPOSE 22
+RUN useradd -m -s /bin/bash caleb
+RUN echo -n 'caleb:***REMOVED***' | chpasswd 
+ENTRYPOINT ["/entrypoint.sh"] 
+RUN mkdir /run/sshd
+EXPOSE 22 
 COPY entrypoint.sh /
+ENV DISPLAY :0
