@@ -1,6 +1,8 @@
 # psychic-octo-barnacle-re
-reverse engineering in docker  
-`docker build -t ubuntu:re .`  
-`docker run --security-opt seccomp=unconfined --cap-add=SYS_PTRACE -d --rm --name reverseme -p 12345:12345 -p 7655:22 ubuntu:re`  
-`docker cp ./maliciousfile reverseme:/tmp`  
-`docker exec -ti reverseme /bin/bash -c 'cd /tmp && /bin/bash'`
+reverse engineering in docker
+## use
+- `docker build -t ubuntu:re .`  
+- `docker run -v ~/workdir:/home/caleb --privileged --security-opt seccomp=unconfined --cap-add=SYS_PTRACE -d --rm --name reverseme ubuntu:re`  
+- `docker exec -ti reverseme /bin/bash -c 'cd /home/caleb && /bin/bash'`
+### also try
+https://docs.remnux.org/run-tools-in-containers/remnux-containers
