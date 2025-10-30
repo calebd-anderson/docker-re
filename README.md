@@ -1,5 +1,5 @@
 # Reverse engineering in Docker
-This projects holds a Docker container configured with some great reverse engineering tools and greater security enabled for malware analysis.
+This projects holds a Docker container configured with some great reverse engineering tools and increased security enabled for malware analysis.
 ## Build the container
 ```
 docker build -t ubuntu:re --build-arg username=<username> .
