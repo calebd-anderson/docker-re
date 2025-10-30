@@ -13,4 +13,6 @@ docker run -v ~/workdir:/home/<username> --privileged --security-opt seccomp=unc
 docker exec -ti reverseme /bin/bash -c 'cd /home/<username> && /bin/bash'
 ```
 ### More Information
-https://docs.remnux.org/run-tools-in-containers/remnux-containers
+- [remnux-containers](https://docs.remnux.org/run-tools-in-containers/remnux-containers)
+- [pwntools](https://github.com/Gallopsled/pwntools)
+- [radare2](https://github.com/radareorg/radare2)
