@@ -11,7 +11,7 @@ RUN apt install -y gcc build-essential libc6:i386 libncurses5:i386 libstdc++6:i3
 RUN apt install -y openssh-server vim file bsdmainutils less make python3 git sudo unzip zip python3-pip python3-dev libssl-dev libffi-dev && rm -rf /var/lib/apt/lists/*
 # allow ssh login
 RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
-ARG username
+ARG username=user1
 RUN useradd -m -s /bin/bash $username
 RUN echo -n "${username}:secret" | chpasswd
 RUN usermod -aG sudo $username
