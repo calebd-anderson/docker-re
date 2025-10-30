@@ -1,5 +1,4 @@
 FROM alpine:latest
-LABEL maintainer="Caleb Anderson caleb.anderson@my.metrostate.edu"
 RUN apk add --update --no-cache openssh
 RUN apk add vim file binutils libc6-compat gcc gdb musl-dev python3
 RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
