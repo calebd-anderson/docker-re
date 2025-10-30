@@ -1,4 +1,6 @@
-FROM ubuntu:latest
+# FROM ubuntu:latest
+# RUN echo "deb http://security.ubuntu.com/ubuntu focal-security main universe" > /etc/apt/sources.list.d/ubuntu-focal-sources.list
+FROM ubuntu:22.04
 RUN dpkg --add-architecture i386
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt upgrade -y
@@ -9,10 +11,11 @@ RUN apt install -y gcc build-essential libc6:i386 libncurses5:i386 libstdc++6:i3
 RUN apt install -y openssh-server vim file bsdmainutils less make python3 git sudo unzip zip python3-pip python3-dev libssl-dev libffi-dev && rm -rf /var/lib/apt/lists/*
 # allow ssh login
 RUN echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
-RUN useradd -m -s /bin/bash caleb
-RUN echo -n 'caleb:secret' | chpasswd
-RUN usermod -aG sudo caleb
-# install radare2 (requires sudeo)
+ARG username
+RUN useradd -m -s /bin/bash $username
+RUN echo -n "${username}:secret" | chpasswd
+RUN usermod -aG sudo $username
+# install radare2 (requires sudo)
 RUN cd /tmp && git clone https://github.com/radareorg/radare2
 RUN /tmp/radare2/sys/install.sh
 # install pwntools
