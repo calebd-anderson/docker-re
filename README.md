@@ -9,7 +9,7 @@ docker build -t ubuntu:re --build-arg username=<username> .
 # basic container with a volume pointing to the host
 docker run -v ~/workdir:/home/<username> --privileged --security-opt seccomp=unconfined --cap-add=SYS_PTRACE -d --rm --name reverseme ubuntu:re
 ```
-### Remote Debugging (analysis)
+### Remote Debugging (dynamic analysis)
 ```sh
 # with open ports for remote analysis
 docker run --security-opt seccomp=unconfined --cap-add=SYS_PTRACE -d --rm --name reverseme -p 12345:12345 -p 7655:22 ubuntu:re
