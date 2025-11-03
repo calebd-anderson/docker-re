@@ -1,13 +1,24 @@
 # Reverse engineering in Docker
-This projects holds a Docker container configured with some great reverse engineering tools and increased security enabled for malware analysis.
+This projects holds a Docker container configured with reverse engineering tooling.
 ## Build the container
 ```
 docker build -t ubuntu:re --build-arg username=<username> .
 ```
-## Start the container with some security
+
+## Container Security
+- [Docker Security](https://docs.docker.com/engine/security/)
+- To allow dynamic analysis we must enable a sys call on the container 
+  - `--cap-add=SYS_PTRACE`
+  - `--security-opt seccomp=unconfined`
+- Avoid the `--privileged` flag as it basically disables all security
+  - [runtime-privilege-and-linux-capabilities](https://docs.docker.com/engine/containers/run/#runtime-privilege-and-linux-capabilities)
+  - [Privileged flag](https://docs.docker.com/reference/cli/docker/container/run/#privileged)
+  - [seccomp](https://docs.docker.com/engine/security/seccomp/)
+
+## Start the container
 ```sh
-# basic container with a volume pointing to the host
-docker run -v ~/workdir:/home/<username> --privileged --security-opt seccomp=unconfined --cap-add=SYS_PTRACE -d --rm --name reverseme ubuntu:re
+# basic container
+docker run -v ~/workdir:/home/<username> --security-opt seccomp=unconfined --cap-add=SYS_PTRACE -d --rm --name reverseme ubuntu:re
 ```
 ### Remote Debugging (dynamic analysis)
 ```sh
@@ -28,3 +39,4 @@ docker exec -ti reverseme /bin/bash -c 'cd /home/<username> && /bin/bash'
 - [remnux-containers](https://docs.remnux.org/run-tools-in-containers/remnux-containers)
 - [pwntools](https://github.com/Gallopsled/pwntools)
 - [radare2](https://github.com/radareorg/radare2)
+- [Docker Containers for Malware Analysis](https://zeltser.com/media/archive/docker.pdf)
