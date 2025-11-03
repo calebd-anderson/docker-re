@@ -56,3 +56,4 @@ docker exec -ti reverseme /bin/bash -c 'cd /home/<username> && /bin/bash'
 - [radare2](https://github.com/radareorg/radare2)
 - [Docker Containers for Malware Analysis](https://zeltser.com/media/archive/docker.pdf)
 - [Fedora Container OS](https://docs.fedoraproject.org/en-US/fedora-coreos/)
+- [CPP Debugging Blog Post](https://leimao.github.io/blog/Debug-CPP-In-Docker-Container/)
