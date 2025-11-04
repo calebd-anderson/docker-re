@@ -21,7 +21,7 @@ docker build -t ubuntu:re --build-arg username=<username> .
 > - Kernel seccomp profile: `--security-opt seccomp=unconfined`
 
 > [!TIP]
-> Avoid the [`--privileged flag`](https://docs.docker.com/reference/cli/docker/container/run/#privileged) as it basically disables all security.
+> Avoid the [`--privileged` flag](https://docs.docker.com/reference/cli/docker/container/run/#privileged) as it basically disables all security.
 
 ## Start the container
 
